@@ -39,7 +39,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     if not secret_key:
         raise ValueError("SECRET_KEY environment variable not set")
 
-    encoded_jwt = jwt.encode(to_encode, secret_key, algorithm="HS256")
+    encoded_jwt = jwt.encode(to_encode, os.getenv("SECRET_KEY"), algorithm="HS256")
     print(f"Token created successfully: {encoded_jwt[:50]}...")
 
     return encoded_jwt
