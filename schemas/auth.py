@@ -1,44 +1,38 @@
 from pydantic import BaseModel
 
 
-class UserRegisterRequest(BaseModel):
+class AddNewUserRequest(BaseModel):
+    user_name: str
+    email: str
+    password: str
     first_name: str
     last_name: str
+    phone_number: str
+
+
+class NewUserResponse(BaseModel):
+    status: str
+    message: str
+    user_id: str
+
+
+class LoginRequest(BaseModel):
     user_name: str
     password: str
+    email: str
 
 
-class UserRegisterResponse(BaseModel):
-    status: bool
+class LoginResponse(BaseModel):
+    status: str
     message: str
+    user_id: str
 
 
-class UserLoginRequest(BaseModel):
-    user_name: str
-    password: str
+class RemoveUserRequest(BaseModel):
+    email: str
 
 
-class UserLoginResponse(BaseModel):
-    status: bool
+class RemoveResponse(BaseModel):
+    status: str
     message: str
-
-
-# class UpdatePasswordRequest(BaseModel):
-#     user_name: str
-#     current_password: str
-#     new_password: str
-#
-#
-# class UpdatePasswordResponse(BaseModel):
-#     status: bool
-#     message: str
-#
-#
-# class DeleteRequest(BaseModel):
-#     user_name: str
-#     password: str
-#
-#
-# class DeleteResponse(BaseModel):
-#     status: bool
-#     message: str
+    user_id: str

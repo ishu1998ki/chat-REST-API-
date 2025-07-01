@@ -1,12 +1,8 @@
-from datetime import datetime
 from uvicorn import run
-from pydantic import BaseModel
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-from routes.chat import chat_router
-from routes.auth import auth_router
-
+from auth.routes import router as authentication_router
+from conversations.routes import router as convesation_roter
 app = FastAPI()
 
 # middleware to allow CORS
@@ -17,10 +13,8 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
-
-app.include_router(chat_router)
-app.include_router(auth_router)
-
+app.include_router(router=authentication_router, prefix="/users")
+app.include_router(router=convesation_roter, prefix="/chat")
 
 if __name__ == '__main__':
     run("main:app", host="0.0.0.0", port=8000)
